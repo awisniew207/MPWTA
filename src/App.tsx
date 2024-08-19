@@ -58,7 +58,7 @@ function App() {
         dataCheckString,
         secretKeyHash
       ).toString(enc.Hex);
-
+      console.log("Calculated", calculatedHash);
       const isValid = calculatedHash === user.hash;
       const isRecent = Date.now() / 1000 - user.auth_date < 600;
 
