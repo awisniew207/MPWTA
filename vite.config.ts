@@ -1,20 +1,20 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
-import { NodeModulesPolyfillPlugin } from "@esbuild-plugins/node-modules-polyfill";
-import rollupNodePolyFill from "rollup-plugin-polyfill-node";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
+import rollupNodePolyFill from 'rollup-plugin-polyfill-node';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
   plugins: [
     react(),
     nodePolyfills({
-      include: ["buffer", "process", "util"],
+      include: ['buffer', 'process', 'util']
     }),
   ],
   define: {
-    "process.env": {},
-    global: "globalThis",
+    'process.env': {},
+    global: 'globalThis',
   },
   resolve: {
     alias: {
@@ -24,12 +24,12 @@ export default defineConfig({
   optimizeDeps: {
     esbuildOptions: {
       define: {
-        global: "globalThis",
+        global: 'globalThis',
       },
       plugins: [
         NodeGlobalsPolyfillPlugin({
           buffer: true,
-          process: true,
+          process: true
         }),
         NodeModulesPolyfillPlugin(),
       ],
@@ -37,11 +37,9 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      plugins: [rollupNodePolyFill()],
+      plugins: [
+        rollupNodePolyFill(),
+      ],
     },
-  },
-  server: {
-    host: "0.0.0.0", // This allows external access
-    port: 3000, // You can change this port if needed
   },
 });
